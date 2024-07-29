@@ -64,6 +64,7 @@ CREATE TABLE `tblbooking` (
   `BookingDate` timestamp NULL DEFAULT current_timestamp(),
   `Remark` varchar(200) DEFAULT NULL,
   `Status` varchar(200) DEFAULT NULL,
+  `PaymentIDX` varchar(200) DEFAULT NULL,
   `UpdationDate` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

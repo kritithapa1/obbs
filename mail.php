@@ -2,74 +2,76 @@
 include('includes/dbconnection.php');
 session_start();
 error_reporting(0);
-if(isset($_POST['submit']))
-  {
-    $name=$_POST['name'];
-    $email=$_POST['email'];
-     $message=$_POST['message'];
-    $sql="insert into tblcontact(Name,Email,Message)values(:name,:email,:message)";
-$query=$dbh->prepare($sql);
-$query->bindParam(':name',$name,PDO::PARAM_STR);
-$query->bindParam(':email',$email,PDO::PARAM_STR);
+if (isset($_POST['submit'])) {
+	$name = $_POST['name'];
+	$email = $_POST['email'];
+	$message = $_POST['message'];
+	$sql = "insert into tblcontact(Name,Email,Message)values(:name,:email,:message)";
+	$query = $dbh->prepare($sql);
+	$query->bindParam(':name', $name, PDO::PARAM_STR);
+	$query->bindParam(':email', $email, PDO::PARAM_STR);
 
-$query->bindParam(':message',$message,PDO::PARAM_STR);
-$query->execute();
-   $LastInsertId=$dbh->lastInsertId();
-   if ($LastInsertId>0) {
-   echo "<script>alert('Your message was sent successfully!.');</script>";
-echo "<script>window.location.href ='mail.php'</script>";
-  }
-  else
-    {
-       echo '<script>alert("Something Went Wrong. Please try again")</script>';
-    }
+	$query->bindParam(':message', $message, PDO::PARAM_STR);
+	$query->execute();
+	$LastInsertId = $dbh->lastInsertId();
+	if ($LastInsertId > 0) {
+		echo "<script>alert('Your message was sent successfully!.');</script>";
+		echo "<script>window.location.href ='mail.php'</script>";
+	} else {
+		echo '<script>alert("Something Went Wrong. Please try again")</script>';
+	}
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<title>Online Banquet Booking System | Mail</title>
 
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!-- bootstrap-css -->
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<!--// bootstrap-css -->
-<!-- css -->
-<link rel="stylesheet" href="css/style1.css" type="text/css" media="all" />
-<!--// css -->
-<!-- font-awesome icons -->
-<link href="css/font-awesome.css" rel="stylesheet"> 
-<!-- //font-awesome icons -->
-<!-- font -->
-<link href="//fonts.googleapis.com/css?family=Josefin+Sans:100,100i,300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
-<link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,700italic,700,400italic,300italic,300' rel='stylesheet' type='text/css'>
-<!-- //font -->
-<script src="js/jquery-1.11.1.min.js"></script>
-<script src="js/bootstrap.js"></script>
-<!-- <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+<head>
+	<title>Online Banquet Booking System | Mail</title>
+
+	<script
+		type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<!-- bootstrap-css -->
+	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<!--// bootstrap-css -->
+	<!-- css -->
+	<link rel="stylesheet" href="css/style1.css" type="text/css" media="all" />
+	<!--// css -->
+	<!-- font-awesome icons -->
+	<link href="css/font-awesome.css" rel="stylesheet">
+	<!-- //font-awesome icons -->
+	<!-- font -->
+	<link href="//fonts.googleapis.com/css?family=Josefin+Sans:100,100i,300,300i,400,400i,600,600i,700,700i"
+		rel="stylesheet">
+	<link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,700italic,700,400italic,300italic,300'
+		rel='stylesheet' type='text/css'>
+	<!-- //font -->
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<!-- <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
 
-<!-- Then include bootstrap js -->
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> -->
+	<!-- Then include bootstrap js -->
+	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> -->
 
 
-<script type="text/javascript">
-	jQuery(document).ready(function($) {
-		$(".scroll").click(function(event){		
-			event.preventDefault();
-			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+	<script type="text/javascript">
+		jQuery(document).ready(function ($) {
+			$(".scroll").click(function (event) {
+				event.preventDefault();
+				$('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
+			});
 		});
-	});
-</script> 
-<!--[if lt IE 9]>
+	</script>
+	<!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 <![endif]-->
 </head>
+
 <body>
 	<!-- banner -->
 	<div class="banner jarallax">
 		<div class="agileinfo-dot">
-			<?php include_once('includes/header.php');?>
+			<?php include_once('includes/header.php'); ?>
 			<div class="wthree-heading">
 				<h2>Contact</h2>
 			</div>
@@ -83,24 +85,30 @@ echo "<script>window.location.href ='mail.php'</script>";
 				<div class="col-md-6 contact-form-left">
 					<div class="w3layouts-contact-form-top">
 						<h3>Get in touch</h3>
-						<p>If you would like to find out more about how we can help you, please give us a call or drop us an email. We welcome your comments and suggestions about this website or any queries please let us know.</p>
+						<p>If you would like to find out more about how we can help you, please give us a call or drop
+							us an email. We welcome your comments and suggestions about this website or any queries
+							please let us know.</p>
 					</div>
 					<div class="agileits-contact-address">
 						<ul>
 							<?php
-$sql="SELECT * from tblpage where PageType='contactus'";
-$query = $dbh -> prepare($sql);
-$query->execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
+							$sql = "SELECT * from tblpage where PageType='contactus'";
+							$query = $dbh->prepare($sql);
+							$query->execute();
+							$results = $query->fetchAll(PDO::FETCH_OBJ);
 
-$cnt=1;
-if($query->rowCount() > 0)
-{
-foreach($results as $row)
-{               ?>
-							<li><i class="fa fa-phone" aria-hidden="true"></i> <span><?php  echo htmlentities($row->MobileNumber);?></span></li>
-							<li><i class="fa fa-phone fa-envelope" aria-hidden="true"></i> <span><?php  echo htmlentities($row->Email);?></span></li>
-							<li><i class="fa fa-map-marker" aria-hidden="true"></i> <span><?php  echo htmlentities($row->PageDescription);?>.</span></li><?php $cnt=$cnt+1;}} ?>
+							$cnt = 1;
+							if ($query->rowCount() > 0) {
+								foreach ($results as $row) { ?>
+									<li><i class="fa fa-phone" aria-hidden="true"></i>
+										<span><?php echo htmlentities($row->MobileNumber); ?></span></li>
+									<li><i class="fa fa-phone fa-envelope" aria-hidden="true"></i>
+										<span><?php echo htmlentities($row->Email); ?></span></li>
+									<li><i class="fa fa-map-marker" aria-hidden="true"></i>
+										<span><?php echo htmlentities($row->PageDescription); ?>.</span></li>
+									<?php $cnt = $cnt + 1;
+								}
+							} ?>
 						</ul>
 					</div>
 				</div>
@@ -110,8 +118,8 @@ foreach($results as $row)
 					</div>
 					<div class="agileinfo-contact-form-grid">
 						<form action="#" method="post">
-							<input  placeholder="Full Name " name="name" type="text" required="true">
-							<input  placeholder="Email" name="email" type="email" required="true">
+							<input placeholder="Full Name " name="name" type="text" required="true">
+							<input placeholder="Email" name="email" type="email" required="true">
 							<textarea name="message" placeholder="Message" required=""></textarea>
 							<button class="btn1" name="submit">Submit</button>
 						</form>
@@ -119,11 +127,11 @@ foreach($results as $row)
 				</div>
 				<div class="clearfix"> </div>
 			</div>
-			
+
 
 		</div>
 	</div>
-	
+
 	<!-- jarallax -->
 	<script src="js/jarallax.js"></script>
 	<script src="js/SmoothScroll.min.js"></script>
@@ -141,7 +149,7 @@ foreach($results as $row)
 	<script type="text/javascript" src="js/easing.js"></script>
 	<!-- here stars scrolling icon -->
 	<script type="text/javascript">
-		$(document).ready(function() {
+		$(document).ready(function () {
 			/*
 				var defaults = {
 				containerID: 'toTop', // fading element id
@@ -150,13 +158,14 @@ foreach($results as $row)
 				easingType: 'linear' 
 				};
 			*/
-								
-			$().UItoTop({ easingType: 'easeOutQuart' });
-								
-			});
-	</script>
-<!-- //here ends scrolling icon -->
-<script src="js/modernizr.custom.js"></script>
 
-</body>	
+			$().UItoTop({ easingType: 'easeOutQuart' });
+
+		});
+	</script>
+	<!-- //here ends scrolling icon -->
+	<script src="js/modernizr.custom.js"></script>
+
+</body>
+
 </html>
